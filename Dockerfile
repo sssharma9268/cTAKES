@@ -1,14 +1,20 @@
-FROM maven:3.5-jdk-8-alpine as builder
+FROM maven:3.5-jdk-8-alpine as maven
+
+COPY ./pom.xml ./pom.xml
+COPY ./src ./src
+
+RUN mvn dependency:go-offline -B
+RUN mvn package
+
+FROM openjdk:8u171-jre-alpine
 
 WORKDIR /app
-COPY . /app
- 
 
-COPY --from=build /app/target/ctakes-misc-4.0.0-jar-with-dependencies.jar /app/ctakes-misc.jar
+COPY --from=maven target/ctakes-misc-*.jar ./app/ctakes-misc.jar
 
 EXPOSE 8080
 
-CMD ["java","-jar","/app/ctakes-misc.jar"]
+CMD ["java","-jar","./app/ctakes-misc.jar"]
 
 FROM python:3.6-slim
 
