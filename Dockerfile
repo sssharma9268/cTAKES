@@ -1,11 +1,11 @@
-FROM maven:3.5-jdk-8-alpine as maven
+FROM maven:3 as maven
 
 WORKDIR /app
 COPY . /app
 
 RUN ["mvn","package","-DskipTests"]
 
-FROM openjdk:8u171-jre-alpine
+FROM openjdk:8-jdk
 
 WORKDIR /app
 
