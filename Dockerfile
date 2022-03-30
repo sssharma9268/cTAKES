@@ -3,7 +3,6 @@ FROM maven:3.5-jdk-8-alpine as builder
 WORKDIR /app
 COPY . /app
  
-RUN ["mvn","package","-DskipTests"]
 
 COPY --from=build /app/target/ctakes-misc-4.0.0-jar-with-dependencies.jar /app/ctakes-misc.jar
 
