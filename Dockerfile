@@ -2,14 +2,15 @@
 FROM alpine:3.7 as build
 
 ### 2. Get Java via the package manager
-RUN apk update \
-&& apk upgrade \
-&& apk add --no-cache bash \
-&& apk add --no-cache --virtual=build-dependencies unzip \
-&& apk add --no-cache curl \
-&& apk add --no-cache openjdk8-jre
+RUN apk update
+RUN apk fetch openjdk8
+RUN apk add openjdk8
 
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/"
+ENV PATH="$JAVA_HOME/bin:${PATH}"
+
+RUN java -version
+RUN javac -version
 
 ### 3. Get Maven
 ENV MAVEN_VERSION 3.0.5
@@ -19,8 +20,11 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
   rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
   mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
   
-ENV MAVEN_HOME /usr/lib/mvn
-ENV PATH $MAVEN_HOME/bin:$PATH
+ENV MAVEN_HOME="/usr/lib/mvn"
+ENV PATH="$MAVEN_HOME/bin:${PATH}"
+
+CMD ["mvn", "--version"]
+
 
 ### 4. Get Python, PIP
 
