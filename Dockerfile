@@ -22,16 +22,17 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
   mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
 ### Build the project
-WORKDIR /app
-COPY . /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . /usr/src/app
 
 RUN ["mvn","package","-DskipTests"]
 
-COPY /app/target/ctakes-misc-*.jar /app/
+COPY /usr/src/app/target/ctakes-misc-*.jar /usr/src/app/
 
 EXPOSE 8080
 
-CMD ["java","-jar","/app/ctakes-misc-*.jar"]
+CMD ["java","-jar","/usr/src/app/ctakes-misc-*.jar"]
 
 ### 4. Get Python, PIP
 
