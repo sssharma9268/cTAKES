@@ -9,19 +9,17 @@ RUN apk update \
 && apk add --no-cache curl \
 && apk add --no-cache openjdk8-jre
 
+ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/"
+
 ### 3. Get Maven
-ARG MAVEN_VERSION=3.6.1
-ARG USER_HOME_DIR="/root"
-ARG BASE_URL=https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ENV MAVEN_VERSION 3.5.4
+ENV MAVEN_HOME /usr/lib/mvn
+ENV PATH $MAVEN_HOME/bin:$PATH
 
-RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
- && curl -O -k ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
- && tar -xzf /apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /usr/share/maven --strip-components=1 \
- && rm -f /apache-maven-${MAVEN_VERSION}-bin.tar.gz \
- && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
-
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+  tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+  rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+  mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
 ### Build the project
 WORKDIR /app
@@ -35,7 +33,7 @@ EXPOSE 8080
 
 CMD ["java","-jar","/app/ctakes-misc-*.jar"]
 
-### 3. Get Python, PIP
+### 4. Get Python, PIP
 
 RUN apk add --no-cache python3 \
 && python3 -m ensurepip \
@@ -45,14 +43,8 @@ if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
 if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
 rm -r /root/.cache
 
-### Get Flask for the app
+### 5. Get Flask for the app
 RUN pip install --trusted-host pypi.python.org flask
-
-####
-#### 4. SET JAVA_HOME environment variable.
-ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/"
-
-####
 
 EXPOSE 81    
 ADD test.py /
