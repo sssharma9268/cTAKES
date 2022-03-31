@@ -22,19 +22,6 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
 ENV MAVEN_HOME /usr/lib/mvn
 ENV PATH $MAVEN_HOME/bin:$PATH
 
-### Build the project
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-
-RUN ["mvn","package","-DskipTests"]
-
-COPY /usr/src/app/target/ctakes-misc-*.jar /usr/src/app/
-
-EXPOSE 8080
-
-CMD ["java","-jar","/usr/src/app/ctakes-misc-*.jar"]
-
 ### 4. Get Python, PIP
 
 RUN apk add --no-cache python3 \
