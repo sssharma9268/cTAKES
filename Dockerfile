@@ -15,9 +15,9 @@ ARG USER_HOME_DIR="/root"
 ARG BASE_URL=https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
- && curl -O -k ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz > /tmp/apache-maven.tar.gz \
- && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
- && rm -f /tmp/apache-maven.tar.gz \
+ && curl -O -k ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+ && tar -xzf /apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /usr/share/maven --strip-components=1 \
+ && rm -f /apache-maven-${MAVEN_VERSION}-bin.tar.gz \
  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 ENV MAVEN_HOME /usr/share/maven
