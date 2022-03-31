@@ -23,7 +23,7 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
 ENV MAVEN_HOME="/usr/lib/mvn"
 ENV PATH="$MAVEN_HOME/bin:${PATH}"
 
-RUN mvn -version
+RUN mvn --version
 
 
 ### 4. Get Python, PIP
@@ -39,7 +39,7 @@ rm -r /root/.cache
 ### 5. Get Flask for the app
 RUN pip install --trusted-host pypi.python.org flask
 
-RUN python -version
+RUN python --version
 
 EXPOSE 81    
 ADD test.py /
