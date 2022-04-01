@@ -9,7 +9,6 @@ COPY . /usr/app
 RUN apk add sudo
 RUN addgroup -S ctakesgroup
 RUN adduser -S -D -h /usr/app ctakesuser -G ctakesgroup
-RUN chown -R ctakesuser:ctakesgroup /usr/
 USER root
 
 ### 2. Get Java via the package manager
