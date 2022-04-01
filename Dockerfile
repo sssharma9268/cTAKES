@@ -7,7 +7,7 @@ COPY . /usr/app
 
 ### Adding user
 RUN apk add sudo
-RUN adduser -ms /bin/bash ctakesuser && \
+RUN adduser -S -D /bin/bash ctakesuser && \
     usermod -aG sudo ctakesuser
 User ctakesuser
 
