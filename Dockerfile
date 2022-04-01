@@ -37,7 +37,8 @@ ENV PATH="$MAVEN_HOME/bin:${PATH}"
 RUN mvn --version
 
 WORKDIR /usr/app
-RUN ["mvn","package","-DskipTests"]
+##RUN ["mvn","package","-DskipTests"]
+RUN mvn clean install -P autoinstallPackage -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
 COPY --from=build /usr/app/target/ctakes-misc-*.jar /usr/app/
 EXPOSE 8080
 CMD ["java","-jar","/usr/app/ctakes-misc-*.jar"]
