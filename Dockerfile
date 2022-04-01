@@ -7,8 +7,8 @@ COPY . /usr/app
 
 ### Adding user
 RUN addgroup -S ctakesgroup
-RUN adduser -S -D -h /usr/app ctakesuser ctakesgroup
-RUN chown -R ctakesuser:ctakesgroup /usr/
+RUN echo '%ctakesgroup ALL=(ALL) ALL' > /etc/sudoers.d/ctakesgroup
+RUN adduser ctakesuser ctakesgroup
 USER ctakesuser
 
 ### 2. Get Java via the package manager
