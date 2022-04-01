@@ -6,10 +6,10 @@ WORKDIR /usr/app
 COPY . /usr/app
 
 ### Adding user
+RUN apk add sudo
 RUN addgroup -S ctakesgroup
-RUN echo '%ctakesgroup ALL=(ALL) ALL' > /etc/sudoers.d/ctakesgroup
 RUN adduser ctakesuser ctakesgroup
-USER ctakesuser
+RUN sudo -lU ctakesuser
 
 ### 2. Get Java via the package manager
 RUN apk update
