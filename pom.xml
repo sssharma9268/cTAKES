@@ -36,6 +36,7 @@
 		<groupId>org.apache.ctakes</groupId>
 		<artifactId>ctakes</artifactId>
 		<version>4.0.0</version>
+		<relativePath />
 	</parent>
 	<dependencies>
 	<dependency>
