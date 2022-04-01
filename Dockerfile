@@ -2,6 +2,9 @@
 FROM alpine:3.7 as build
 
 RUN mkdir -p /usr/app
+RUN mkdir -p /root/.m2 \ && mkdir /root/.m2/repository
+COPY settings.xml /root/.m2
+
 WORKDIR /usr/app
 COPY . /usr/app
 
@@ -38,7 +41,7 @@ RUN mvn --version
 
 WORKDIR /usr/app
 ##RUN ["mvn","package","-DskipTests"]
-RUN mvn --settings /usr/app/settings.xml clean install
+RUN mvn clean install
 COPY --from=build /usr/app/target/ctakes-misc-*.jar /usr/app/
 EXPOSE 8080
 CMD ["java","-jar","/usr/app/ctakes-misc-*.jar"]
