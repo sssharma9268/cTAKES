@@ -8,8 +8,9 @@ COPY . /usr/app
 ### Adding user
 RUN apk add sudo
 RUN addgroup -S ctakesgroup
-RUN adduser -S -D ctakesuser ctakesgroup
-RUN sudo ctakesuser
+RUN adduser -S -D -h /usr/app ctakesuser -G ctakesgroup
+RUN chown -R ctakesuser:ctakesgroup /usr/
+USER root
 
 ### 2. Get Java via the package manager
 RUN apk update
@@ -57,5 +58,7 @@ RUN python --version
 EXPOSE 81    
 ADD test.py /
 CMD ["python", "test.py"]
+
+User ctakesuser
 
 
