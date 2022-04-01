@@ -7,9 +7,9 @@ COPY . /usr/app
 
 ### Adding user
 RUN apk add sudo
-RUN adduser -S -D /bin/bash ctakesuser && \
-    usermod -aG sudo ctakesuser
-User ctakesuser
+RUN addgroup -S ctakesgroup
+RUN adduser -S -D ctakesuser ctakesgroup
+RUN sudo ctakesuser
 
 ### 2. Get Java via the package manager
 RUN apk update
