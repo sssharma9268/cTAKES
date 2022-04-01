@@ -41,7 +41,7 @@ RUN mvn --version
 
 WORKDIR /usr/app
 ##RUN ["mvn","package","-DskipTests"]
-RUN mvn clean install
+RUN mvn --settings /root/.m2/settings.xml clean install
 COPY --from=build /usr/app/target/ctakes-misc-*.jar /usr/app/
 EXPOSE 8080
 CMD ["java","-jar","/usr/app/ctakes-misc-*.jar"]
