@@ -40,7 +40,30 @@
 	</parent>
 	<dependencies>
 	<dependency>
-		
+    <groupId>org.hsqldb</groupId>
+    <artifactId>hsqldb</artifactId>
+    <version>2.5.0</version>
+    
+</dependency>
+			<dependency>
+			<groupId>org.apache.pig</groupId>
+			<artifactId>pig</artifactId>
+			<version>${pig.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-mapreduce-client-core</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+	
+    <dependency>
       <groupId>org.apache.ctakes</groupId>
       <artifactId>ctakes-temporal</artifactId>
     </dependency> 
@@ -156,6 +179,11 @@
 			<groupId>org.cleartk</groupId>
 			<artifactId>cleartk-ml-mallet</artifactId>
 			<!-->version>2.0.1-SNAPSHOT</version-->
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.11.7</version>
 		</dependency>
 		<!--dependency>
 			<groupId>org.apache.ctakes</groupId>
