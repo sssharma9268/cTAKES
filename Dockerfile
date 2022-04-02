@@ -12,7 +12,7 @@ COPY . /usr/app
 RUN apk add sudo
 RUN addgroup -S ctakesgroup
 RUN adduser -S -D -h /usr/app ctakesuser -G ctakesgroup
-RUN chown -R ctakesuser:ctakesgroup /usr/
+###RUN chown -R ctakesuser:ctakesgroup /usr/
 USER root
 
 ### 2. Get Java via the package manager
@@ -42,7 +42,7 @@ RUN mvn --version
 WORKDIR /usr/app
 ##RUN ["mvn","package","-DskipTests"]
 RUN mvn --settings /root/.m2/settings.xml clean install
-COPY --from=build /usr/app/target/ctakes-misc-*.jar /usr/app/
+COPY /usr/app/target/ctakes-misc-*.jar /usr/app/
 EXPOSE 8080
 CMD ["java","-jar","/usr/app/ctakes-misc-*.jar"]
 
