@@ -40,9 +40,9 @@ RUN mvn --version
 WORKDIR /usr/app
 ##RUN ["mvn","package","-DskipTests"]
 RUN mvn clean install
-COPY /usr/app/target/ctakes-misc-*.jar /usr/app/
+###COPY /root/.m2/repository/org/apache/ctakes/ctakes-misc/4.0.0/ctakes-misc-4.0.0-jar-*.jar /usr/app/
 EXPOSE 8080
-CMD ["java","-jar","/usr/app/ctakes-misc-*.jar"]
+CMD ["java","-jar","/root/.m2/repository/org/apache/ctakes/ctakes-misc/4.0.0/ctakes-misc-4.0.0-jar-*.jar"]
 
 ### 4. Get Python, PIP
 
