@@ -63,6 +63,6 @@ EXPOSE 81
 ADD test.py /
 CMD ["python", "test.py"]
 
-User ctakesuser
+USER ctakesuser
 
 
