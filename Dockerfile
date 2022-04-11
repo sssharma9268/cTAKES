@@ -61,7 +61,7 @@ RUN python --version
 
 EXPOSE 5000    
 ADD test.py /
-ENV FLASK_APP=feature_extract_api.py
+ENV FLASK_APP=test.py
 CMD ["flask", "run", "--host", "0.0.0.0"]
 
 #USER ctakesuser
