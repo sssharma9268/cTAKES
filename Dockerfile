@@ -11,7 +11,7 @@ RUN apk add sudo
 RUN addgroup -S ctakesgroup
 RUN adduser -S -D -h /usr/app ctakesuser -G ctakesgroup
 ###RUN chown -R ctakesuser:ctakesgroup /usr/
-USER root
+#USER root
 
 ### 2. Get Java via the package manager
 RUN apk update
@@ -59,10 +59,11 @@ RUN pip install --trusted-host pypi.python.org flask
 
 RUN python --version
 
-EXPOSE 81    
+EXPOSE 5000    
 ADD test.py /
-CMD ["python", "test.py"]
+ENV FLASK_APP=feature_extract_api.py
+CMD ["flask", "run", "--host", "0.0.0.0"]
 
-USER ctakesuser
+#USER ctakesuser
 
 
