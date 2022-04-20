@@ -173,7 +173,7 @@ public class RushEndToEndPipeline {
 		}
 		System.out.println("Closing Pipeline");
 		pipeline.close();
-		config.close();
+		//config.close();
 		//FileUtils.deleteDirectory(newConfigFolder);
 		System.out.println("Closed Pipeline, Now Exiting");
 	}

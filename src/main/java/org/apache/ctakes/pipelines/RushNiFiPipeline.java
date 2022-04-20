@@ -179,6 +179,11 @@ public class RushNiFiPipeline implements AutoCloseable {
         Overview overview = new Overview();
         overview.rawText = rawText;
         overview.xmi = xmi;
+        try {
+            overview.cui = getCuis(xmi);
+        } catch (Exception e) {
+            Throwables.propagate(e);
+        }
         return gson.toJson(overview);
     }
 
@@ -189,6 +194,7 @@ public class RushNiFiPipeline implements AutoCloseable {
 
         String rawText;
         String xmi;
+        String cui;
     }
 
     private static void ensureCorrectSetup(File masterFolder) throws IOException {

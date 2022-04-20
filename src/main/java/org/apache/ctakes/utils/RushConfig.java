@@ -29,9 +29,9 @@ public class RushConfig implements AutoCloseable {
         return tmpConfigRoot;
     }
 
-    public File getNewConfigFolder() {
-        return newConfigFolder;
-    }
+    // public File getNewConfigFolder() {
+    //     return newConfigFolder;
+    // }
 
     public File getLookupXml() {
         return new File(this.newConfigFolder, MASTER_FILE_NAME);
@@ -46,9 +46,9 @@ public class RushConfig implements AutoCloseable {
                 FileUtils.forceMkdir(this.tmpConfigRoot);
             }
             newConfigFolder = new File(this.tmpConfigRoot, randomPrefix);
-            if (newConfigFolder.exists()) {
-                FileUtils.deleteDirectory(newConfigFolder);
-            }
+            // if (newConfigFolder.exists()) {
+            //     FileUtils.deleteDirectory(newConfigFolder);
+            // }
             FileUtils.forceMkdir(newConfigFolder);
             FileUtils.copyDirectory(this.masterRoot, newConfigFolder);
 
@@ -75,6 +75,6 @@ public class RushConfig implements AutoCloseable {
     public static void main(String[] args) {
         RushConfig r = new RushConfig("/tmp/ctakes-config/", "/tmp/ctakes-config2/");
         r.initialize();
-        r.close();
+        //r.close();
     }
 }
