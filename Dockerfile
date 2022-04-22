@@ -56,7 +56,8 @@ rm -r /root/.cache
 
 ### 5. Get Flask for the app
 RUN pip install --trusted-host pypi.python.org flask
-
+RUN pip install Crypto
+RUN pip install pycrypto
 RUN python --version
 
 EXPOSE 5000    
