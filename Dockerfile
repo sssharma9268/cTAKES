@@ -17,6 +17,7 @@ RUN adduser -S -D -h /usr/app ctakesuser -G ctakesgroup
 RUN apk update
 RUN apk fetch openjdk8
 RUN apk add openjdk8
+RUN apk add curl
 
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/"
 ENV PATH="$JAVA_HOME/bin:${PATH}"
