@@ -1,1 +1,79 @@
+from flask import Flask
+import os, shutil, subprocess
+from distutils.dir_util import copy_tree
+app = Flask(__name__)
+
+dirName = 'temp'
+fakeFolder = 'random'
+inputFolder = 'cTakesExample'
+configFolder = 'ctakes-config'
+configFolder2 = 'ctakes-config2'
+
+# Source inputfile path
+#sourceInputfile = 'D:/tmp/cTakesExample/cData' -- receive the input file from API
+ 
+# Destination inputfile path
+destinationInputfile = '/usr/app/temp/cTakesExample/cData'
+
+# Source resource path
+sourceResourcefile = '/usr/app/resources'
+ 
+# Destination resource path
+destinationResourcefile = '/usr/app/temp/ctakes-config'
+
+@app.route('/executeCtakes')
+def executeCtakes():
+    print('Inside cTakes api')
+    os.chdir('/usr/app/')
+    # checking of directory already exists or not
+    if os.path.isdir(dirName):
+        # remove the directory
+        shutil.rmtree(dirName)
+    # Create temp Directory   
+    os.mkdir(dirName) # create the directory
+    print('Directory ', dirName, ' is created successfully')
+    # Change the directory into tmp
+    os.chdir(dirName)
+    # Create fakeFolder Directory
+    os.mkdir(fakeFolder)
+    # Create inputFolder Directory
+    os.mkdir(inputFolder)
+    # create cData folder
+    # Create configFolder Directory
+    os.mkdir(configFolder)
+    # Create configFolder2 Directory
+    os.mkdir(configFolder2)
+    
+    print('Input/Output/Config Folders created successfully')
+    
+    #  Copy the content of Input source to destination /// input file comes from api and directly put into destication folder
+    #copy_tree(sourceInputfile, destinationInputfile)
+    
+    #print('Input files copied from ', sourceInputfile, ' to ', destinationInputfile)
+    #  Copy the content of Resource source to destination
+    copy_tree(sourceResourcefile, destinationResourcefile)
+    print('Configuration files copied from ', sourceResourcefile, ' to ', destinationResourcefile)
+    
+    # Change the directory to cTakes/cTAKES
+    os.chdir('../')
+    os.chdir('/usr/app') # move it to usr/app
+    print('Navigated to cTakes folder and calling RushNiFiPipeline')
+    subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /temp1/cTakesExample/cData --masterFolder /temp1/ctakes-config/ --output-dir /temp1/cTakesExample/ --tempMasterFolder /temp1/ctakes-config2/"', shell=True, check=True)
+    
+    os.chdir('/usr/app/')
+    os.chdir(dirName)
+    os.chdir(inputFolder)
+
+    print('Navigated to the processed input folder')
+    if os.path.isdir('granular'):
+        if os.path.isdir('overview'):
+            print('granular and overview files processed successfully')
+    else:
+        return 'granular and overview files are not processed'
+    print("ctakes process has been completed successfully ")
+    return "ctakes process has been completed successfully " 
+
+if __name__ == '__main__':
+    app.run(debug = True)
+    
 
