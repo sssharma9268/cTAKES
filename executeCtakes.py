@@ -109,14 +109,11 @@ def executeCtakes():
     os.chdir('/usr/app/cTAKES') # move it to usr/app
     print(os.getcwd())
     print('Navigated to cTakes folder and calling RushNiFiPipeline')
-<<<<<<< HEAD
-    subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /temp1/cTakesExample/cData --masterFolder /temp1/ctakes-config/ --output-dir /temp1/cTakesExample/ --tempMasterFolder /temp1/ctakes-config2/ --jobPipline research"', shell=True, check=True)
-=======
     if jobType == 'True': 
         subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /usr/app/temp/cTakesExample/cData --masterFolder /usr/app/temp/ctakes-config/ --output-dir /usr/app/temp/cTakesExample/ --tempMasterFolder /usr/app/temp/ctakes-config2/ --jobPipline daily"', shell=True, check=True)
     else:
         subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /usr/app/temp/cTakesExample/cData --masterFolder /usr/app/temp/ctakes-config/ --output-dir /usr/app/temp/cTakesExample/ --tempMasterFolder /usr/app/temp/ctakes-config2/ --jobPipline research"', shell=True, check=True)
->>>>>>> 15a6544f1e4b44f2bd5f42092a9110b266b89a8b
+
     
     os.chdir('/usr/app/')
     os.chdir(dirName)
