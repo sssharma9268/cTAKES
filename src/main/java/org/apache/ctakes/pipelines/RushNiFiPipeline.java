@@ -155,6 +155,7 @@ public class RushNiFiPipeline implements AutoCloseable {
         System.out.println("jobPipline value is " + jobPipline);
 
         ensureCorrectSetup(masterFolder);
+<<<<<<< HEAD
 
         try (RushConfig config = new RushConfig(masterFolder.getAbsolutePath(), tempMasterFolder.getAbsolutePath())) {
             config.initialize();
@@ -163,6 +164,17 @@ public class RushNiFiPipeline implements AutoCloseable {
                 pipeline.execute(inputDirectory, outputDirectory);
             }
         }
+=======
+        RushConfig config = new RushConfig(masterFolder.getAbsolutePath(), tempMasterFolder.getAbsolutePath());
+        config.initialize();
+        RushNiFiPipeline pipeline = new RushNiFiPipeline(config, true);
+        pipeline.setPipeline(jobPipline);
+        pipeline.execute(inputDirectory, outputDirectory);
+        
+        pipeline.close();
+        //config.close();
+		//FileUtils.deleteDirectory(newConfigFolder);
+>>>>>>> 15a6544f1e4b44f2bd5f42092a9110b266b89a8b
     }
 
     void execute(File inputDirectory, File outputDirectory) throws Exception {
