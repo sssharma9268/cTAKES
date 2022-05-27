@@ -9,3 +9,7 @@
 .git_old/HEAD
 .git_old/hooks/applypatch-msg.sample
 /scripts/deeivegan.sh
+
+.python_packages
+__pycache__
+.venv

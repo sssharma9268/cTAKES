@@ -58,7 +58,7 @@ def executeCtakes():
     os.chdir('../')
     os.chdir('/usr/app') # move it to usr/app
     print('Navigated to cTakes folder and calling RushNiFiPipeline')
-    subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /temp1/cTakesExample/cData --masterFolder /temp1/ctakes-config/ --output-dir /temp1/cTakesExample/ --tempMasterFolder /temp1/ctakes-config2/ --jobPipline research"', shell=True, check=True)
+    subprocess.run('mvn exec:java -Dexec.mainClass="org.apache.ctakes.pipelines.RushNiFiPipeline" -Dexec.args="--input-dir /temp1/cTakesExample/cData --masterFolder /temp1/ctakes-config/ --output-dir /temp1/cTakesExample/ --tempMasterFolder /temp1/ctakes-config2/ --jobPipline daily"', shell=True, check=True)
     
     os.chdir('/usr/app/')
     os.chdir(dirName)

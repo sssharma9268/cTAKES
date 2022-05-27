@@ -46,6 +46,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.lang.String;
 
 public class RushNiFiPipeline implements AutoCloseable {
 
@@ -63,6 +64,10 @@ public class RushNiFiPipeline implements AutoCloseable {
 
         @Option(longName = "tempMasterFolder")
         File getTempMasterFolder();
+
+        @Option(longName = "jobPipline")
+        String getJobPipline();
+
     }
 
     public static final String FAKE_DIR = "/tmp/random/";
@@ -75,7 +80,17 @@ public class RushNiFiPipeline implements AutoCloseable {
     private String lookupXmlPath;
     private String masterFolder;
     private boolean useDefaultForNegationAnnotations = true;
+    private static String jobPipline;
 
+    public void setPipeline(String jobPipline){
+        this.jobPipline = jobPipline;
+    }
+
+    public static String getPipline(){
+        return jobPipline;
+    }
+
+    
     public RushNiFiPipeline(RushConfig config, boolean useDefaultForNegationAnnotations) {
         try {
             this.lookupXmlPath = config.getLookupXml().getAbsolutePath();
@@ -136,18 +151,22 @@ public class RushNiFiPipeline implements AutoCloseable {
         final File outputDirectory = options.getOutputDirectory(); // directory to output xmi files
         final File masterFolder = options.getMasterFolder();
         final File tempMasterFolder = options.getTempMasterFolder();
+        final String jobPipline = options.getJobPipline();
+        System.out.println("jobPipline value is " + jobPipline);
 
         ensureCorrectSetup(masterFolder);
 
         try (RushConfig config = new RushConfig(masterFolder.getAbsolutePath(), tempMasterFolder.getAbsolutePath())) {
             config.initialize();
             try (RushNiFiPipeline pipeline = new RushNiFiPipeline(config, true)) {
+                pipeline.setPipeline(jobPipline);
                 pipeline.execute(inputDirectory, outputDirectory);
             }
         }
     }
 
     void execute(File inputDirectory, File outputDirectory) throws Exception {
+        String jobPiplineValue = RushNiFiPipeline.getPipline();
         for (File file : Objects.requireNonNull(inputDirectory.listFiles())) {
             String rawText = FileUtils.readFileToString(file);
             String fileName = file.getName();
@@ -156,8 +175,14 @@ public class RushNiFiPipeline implements AutoCloseable {
 
             writeXmi(outputDirectory, fileName, xmi);
             writeCui(outputDirectory, fileName, xmi);
-            write(outputDirectory, "granular", fileName, getGranular(xmi));
-            write(outputDirectory, "overview", fileName, getOverview(rawText, xmi));
+            if(jobPiplineValue.equals("daily")) {
+                write(outputDirectory, "granular", fileName, getGranular(xmi));
+                write(outputDirectory, "overview", fileName, getOverview(rawText, xmi));
+            }
+            else if (jobPiplineValue.equals("research")) {
+                write(outputDirectory, "overview", fileName, getOverview(rawText, xmi));
+            }
+            
         }
     }
 
