@@ -1,0 +1,17 @@
+[
+{
+   "rawText":"MENTAL HEALTH DIAGNOSES AND RELEVANT MEDICAL CONDITIONS: Chronic post – traumatic stress disorder (SCT 313182004) Specifiers: Moderate insomnia due to other Mental Disorder (CD-10-CM F51.55) Depessive D/O,Unsp – Major depressive disorder, single episode, unspecified (ICD-10-CM F32.9) SIGNIFICANT PSYCHOSOCIAL AND CONTEXTUAL FACTORS: Exposure to war, Familial Problems, History of Abuse(victim), Marital/Relationship Discord, Lack of Social Support",
+   "pat_enc_csn_id":"pat_enc_123",
+   "note_id":"note_123"
+},
+{
+   "rawText":"MENTAL HEALTH DIAGNOSES AND RELEVANT MEDICAL CONDITIONS: Chronic post – traumatic stress disorder (SCT 313182004) Specifiers: Moderate insomnia due to other Mental Disorder (CD-10-CM F51.55) Depessive D/O,Unsp – Major depressive disorder, single episode, unspecified (ICD-10-CM F32.9) SIGNIFICANT PSYCHOSOCIAL AND CONTEXTUAL FACTORS: Exposure to war, Familial Problems, History of Abuse(victim), Marital/Relationship Discord, Lack of Social Support",
+   "pat_enc_csn_id":"pat_enc_124",
+   "note_id":"note_124"
+},
+{
+   "rawText":"MENTAL HEALTH DIAGNOSES AND RELEVANT MEDICAL CONDITIONS: Chronic post – traumatic stress disorder (SCT 313182004) Specifiers: Moderate insomnia due to other Mental Disorder (CD-10-CM F51.55) Depessive D/O,Unsp – Major depressive disorder, single episode, unspecified (ICD-10-CM F32.9) SIGNIFICANT PSYCHOSOCIAL AND CONTEXTUAL FACTORS: Exposure to war, Familial Problems, History of Abuse(victim), Marital/Relationship Discord, Lack of Social Support",
+   "pat_enc_csn_id":"pat_enc_125",
+   "note_id":"note_125"
+}
+]
